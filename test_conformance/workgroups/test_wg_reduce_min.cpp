@@ -77,7 +77,7 @@ verify_wg_reduce_min_int(int *inptr, int *outptr, size_t n, size_t wg_size)
         {
             if ( min != outptr[i+j] )
             {
-                log_info("work_group_reduce_min int: Error at %u: expected = %d, got = %d\n", i+j, min, outptr[i+j]);
+                log_info("work_group_reduce_min int: Error at %zu: expected = %d, got = %d\n", i+j, min, outptr[i+j]);
                 return -1;
             }
         }
@@ -101,7 +101,7 @@ verify_wg_reduce_min_uint(unsigned int *inptr, unsigned int *outptr, size_t n, s
         {
             if ( min != outptr[i+j] )
             {
-                log_info("work_group_reduce_min uint: Error at %u: expected = %d, got = %d\n", i+j, min, outptr[i+j]);
+                log_info("work_group_reduce_min uint: Error at %zu: expected = %d, got = %d\n", i+j, min, outptr[i+j]);
                 return -1;
             }
         }
@@ -125,7 +125,7 @@ verify_wg_reduce_min_long(cl_long *inptr, cl_long *outptr, size_t n, size_t wg_s
         {
             if ( min != outptr[i+j] )
             {
-                log_info("work_group_reduce_min long: Error at %u: expected = %lld, got = %lld\n", i+j, min, outptr[i+j]);
+                log_info("work_group_reduce_min long: Error at %zu: expected = %lld, got = %lld\n", i+j, min, outptr[i+j]);
                 return -1;
             }
         }
@@ -149,7 +149,7 @@ verify_wg_reduce_min_ulong(cl_ulong *inptr, cl_ulong *outptr, size_t n, size_t w
         {
             if ( min != outptr[i+j] )
             {
-                log_info("work_group_reduce_min ulong: Error at %u: expected = %llu, got = %llu\n", i+j, min, outptr[i+j]);
+                log_info("work_group_reduce_min ulong: Error at %zu: expected = %llu, got = %llu\n", i+j, min, outptr[i+j]);
                 return -1;
             }
         }

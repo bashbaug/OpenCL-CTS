@@ -81,7 +81,7 @@ int determine_validation_error_offset(
             {
                 if (printAsFloat)
                 {
-                    log_error("Sample %ld: coord {%f(%a),%f(%a),%f(%a)} did "
+                    log_error("Sample %zu: coord {%f(%a),%f(%a),%f(%a)} did "
                               "not validate! Expected (%g,%g,%g,%g), got "
                               "(%g,%g,%g,%g), error of %g\n",
                               j, x, x, y, y, z, z, (float)expected[0],
@@ -93,7 +93,7 @@ int determine_validation_error_offset(
                 else
                 {
                     log_error(
-                        "Sample %ld: coord {%f(%a),%f(%a),%f(%a)} did not "
+                        "Sample %zu: coord {%f(%a),%f(%a),%f(%a)} did not "
                         "validate! Expected (%x,%x,%x,%x), got (%x,%x,%x,%x)\n",
                         j, x, x, y, y, z, z, (int)expected[0], (int)expected[1],
                         (int)expected[2], (int)expected[3], (int)resultPtr[0],
@@ -119,7 +119,7 @@ int determine_validation_error_offset(
             {
                 if (printAsFloat)
                 {
-                    log_error("Sample %ld: coord {%f(%a),%f(%a),%f(%a)} did "
+                    log_error("Sample %zu: coord {%f(%a),%f(%a),%f(%a)} did "
                               "not validate! Expected (%g,%g,%g,%g), got "
                               "(%g,%g,%g,%g), error of %g\n",
                               j, x, x, y, y, z, z, (float)expected[0],
@@ -131,7 +131,7 @@ int determine_validation_error_offset(
                 else
                 {
                     log_error(
-                        "Sample %ld: coord {%f(%a),%f(%a),%f(%a)} did not "
+                        "Sample %zu: coord {%f(%a),%f(%a),%f(%a)} did not "
                         "validate! Expected (%x,%x,%x,%x), got (%x,%x,%x,%x)\n",
                         j, x, x, y, y, z, z, (int)expected[0], (int)expected[1],
                         (int)expected[2], (int)expected[3], (int)resultPtr[0],
@@ -158,7 +158,7 @@ int determine_validation_error_offset(
         {
             if (printAsFloat)
             {
-                log_error("Sample %ld: coord {%f(%a),%f(%a),%f(%a)} did not "
+                log_error("Sample %zu: coord {%f(%a),%f(%a),%f(%a)} did not "
                           "validate!\n\tExpected (%g,%g,%g,%g),\n\t     got "
                           "(%g,%g,%g,%g), error of %g\n",
                           j, x, x, y, y, z, z, (float)expected[0],
@@ -169,7 +169,7 @@ int determine_validation_error_offset(
             }
             else
             {
-                log_error("Sample %ld: coord {%f(%a),%f(%a),%f(%a)} did not "
+                log_error("Sample %zu: coord {%f(%a),%f(%a),%f(%a)} did not "
                           "validate!\n\tExpected (%x,%x,%x,%x),\n\t     got "
                           "(%x,%x,%x,%x)\n",
                           j, x, x, y, y, z, z, (int)expected[0],

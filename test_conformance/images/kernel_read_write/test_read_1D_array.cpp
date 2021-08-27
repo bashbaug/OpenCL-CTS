@@ -81,7 +81,7 @@ template <class T> int determine_validation_error_1D_arr( void *imagePtr, image_
         {
             if( (--numClamped) == 0 )
             {
-                log_error( "ERROR: TEST FAILED: Read is erroneously clamping coordinates for image size %ld x %ld!\n", imageInfo->width, imageInfo->arraySize );
+                log_error( "ERROR: TEST FAILED: Read is erroneously clamping coordinates for image size %zu x %zu!\n", imageInfo->width, imageInfo->arraySize );
                 if( printAsFloat )
                 {
                     log_error( "Sample %d: coord {%f(%a), %f(%a)} did not validate!\n\tExpected (%g,%g,%g,%g),\n\tgot      (%g,%g,%g,%g),\n\terror of %g\n",
@@ -139,7 +139,7 @@ template <class T> int determine_validation_error_1D_arr( void *imagePtr, image_
                       (int)j, x, x, y, y, (int)expected[ 0 ], (int)expected[ 1 ], (int)expected[ 2 ], (int)expected[ 3 ],
                       (int)resultPtr[ 0 ], (int)resultPtr[ 1 ], (int)resultPtr[ 2 ], (int)resultPtr[ 3 ] );
         }
-        log_error( "img size %ld,%ld (pitch %ld)", imageInfo->width, imageInfo->arraySize, imageInfo->rowPitch );
+        log_error( "img size %zu,%zu (pitch %zu)", imageInfo->width, imageInfo->arraySize, imageInfo->rowPitch );
         if( clamped )
         {
             log_error( " which would clamp to %d,%d\n", clampedX, clampedY );

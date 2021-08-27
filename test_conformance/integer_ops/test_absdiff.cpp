@@ -34,7 +34,7 @@ static int verify_absdiff_char( const void *p, const void *q, const void *r, siz
         if( inB[i] > inA[i] )
             r = inB[i] - inA[i];
         if( r != outptr[i] )
-        { log_info( "%ld) Failure for absdiff( (char%s) 0x%2.2x, (char%s) 0x%2.2x) = *0x%2.2x vs 0x%2.2x\n", i, sizeName, inA[i], sizeName, inB[i], r, outptr[i] ); return -1; }
+        { log_info( "%zu) Failure for absdiff( (char%s) 0x%2.2x, (char%s) 0x%2.2x) = *0x%2.2x vs 0x%2.2x\n", i, sizeName, inA[i], sizeName, inB[i], r, outptr[i] ); return -1; }
     }
     return 0;
 }
@@ -51,7 +51,7 @@ static int verify_absdiff_uchar( const void *p, const void *q, const void *r, si
         if( inB[i] > inA[i] )
             r = inB[i] - inA[i];
         if( r != outptr[i] )
-        { log_info( "%ld) Failure for absdiff( (uchar%s) 0x%2.2x, (uchar%s) 0x%2.2x) = *0x%2.2x vs 0x%2.2x\n", i, sizeName, inA[i], sizeName, inB[i], r, outptr[i] ); return -1; }
+        { log_info( "%zu) Failure for absdiff( (uchar%s) 0x%2.2x, (uchar%s) 0x%2.2x) = *0x%2.2x vs 0x%2.2x\n", i, sizeName, inA[i], sizeName, inB[i], r, outptr[i] ); return -1; }
     }
     return 0;
 }
@@ -68,7 +68,7 @@ static int verify_absdiff_short( const void *p, const void *q, const void *r, si
         if( inB[i] > inA[i] )
             r = inB[i] - inA[i];
         if( r != outptr[i] )
-        { log_info( "%ld) Failure for absdiff( (short%s) 0x%4.4x, (short%s) 0x%4.4x) = *0x%4.4x vs 0x%4.4x\n", i, sizeName, inA[i], sizeName, inB[i], r, outptr[i] ); return -1; }
+        { log_info( "%zu) Failure for absdiff( (short%s) 0x%4.4x, (short%s) 0x%4.4x) = *0x%4.4x vs 0x%4.4x\n", i, sizeName, inA[i], sizeName, inB[i], r, outptr[i] ); return -1; }
     }
     return 0;
 }
@@ -85,7 +85,7 @@ static int verify_absdiff_ushort( const void *p, const void *q, const void *r, s
         if( inB[i] > inA[i] )
             r = inB[i] - inA[i];
         if( r != outptr[i] )
-        { log_info( "%ld) Failure for absdiff( (ushort%s) 0x%4.4x, (ushort%s) 0x%4.4x) = *0x%4.4x vs 0x%4.4x\n", i, sizeName, inA[i], sizeName, inB[i], r, outptr[i] ); return -1; }
+        { log_info( "%zu) Failure for absdiff( (ushort%s) 0x%4.4x, (ushort%s) 0x%4.4x) = *0x%4.4x vs 0x%4.4x\n", i, sizeName, inA[i], sizeName, inB[i], r, outptr[i] ); return -1; }
     }
     return 0;
 }
@@ -103,7 +103,7 @@ static int verify_absdiff_int( const void *p, const void *q, const void *r, size
             r = inB[i] - inA[i];
         if( r != outptr[i] )
         {
-            log_info( "%ld) Failure for absdiff( (int%s) 0x%8.8x, (int%s) 0x%8.8x) = *0x%8.8x vs 0x%8.8x\n", i, sizeName, inA[i], sizeName, inB[i], r, outptr[i] );
+            log_info( "%zu) Failure for absdiff( (int%s) 0x%8.8x, (int%s) 0x%8.8x) = *0x%8.8x vs 0x%8.8x\n", i, sizeName, inA[i], sizeName, inB[i], r, outptr[i] );
             return -1;
         }
     }
@@ -122,7 +122,7 @@ static int verify_absdiff_uint( const void *p, const void *q, const void *r, siz
         if( inB[i] > inA[i] )
             r = inB[i] - inA[i];
         if( r != outptr[i] )
-        { log_info( "%ld) Failure for absdiff( (uint%s) 0x%8.8x, (uint%s) 0x%8.8x) = *0x%8.8x vs 0x%8.8x\n", i, sizeName, inA[i], sizeName, inB[i], r, outptr[i] ); return -1; }
+        { log_info( "%zu) Failure for absdiff( (uint%s) 0x%8.8x, (uint%s) 0x%8.8x) = *0x%8.8x vs 0x%8.8x\n", i, sizeName, inA[i], sizeName, inB[i], r, outptr[i] ); return -1; }
     }
     return 0;
 }
@@ -139,7 +139,7 @@ static int verify_absdiff_long( const void *p, const void *q, const void *r, siz
         if( inB[i] > inA[i] )
             r = inB[i] - inA[i];
         if( r != outptr[i] )
-        { log_info( "%ld) Failure for absdiff( (long%s) 0x%16.16llx, (long%s) 0x%16.16llx) = *0x%16.16llx vs 0x%16.16llx\n", i, sizeName, inA[i], sizeName, inB[i], r, outptr[i] ); return -1; }
+        { log_info( "%zu) Failure for absdiff( (long%s) 0x%16.16llx, (long%s) 0x%16.16llx) = *0x%16.16llx vs 0x%16.16llx\n", i, sizeName, inA[i], sizeName, inB[i], r, outptr[i] ); return -1; }
     }
     return 0;
 }
@@ -156,7 +156,7 @@ static int verify_absdiff_ulong( const void *p, const void *q, const void *r, si
         if( inB[i] > inA[i] )
             r = inB[i] - inA[i];
         if( r != outptr[i] )
-        { log_info( "%ld) Failure for absdiff( (ulong%s) 0x%16.16llx, (ulong%s) 0x%16.16llx) = *0x%16.16llx vs 0x%16.16llx\n", i, sizeName, inA[i], sizeName, inB[i], r, outptr[i] ); return -1; }
+        { log_info( "%zu) Failure for absdiff( (ulong%s) 0x%16.16llx, (ulong%s) 0x%16.16llx) = *0x%16.16llx vs 0x%16.16llx\n", i, sizeName, inA[i], sizeName, inB[i], r, outptr[i] ); return -1; }
     }
     return 0;
 }

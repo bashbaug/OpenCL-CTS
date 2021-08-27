@@ -51,7 +51,7 @@
             __popcnt(x, __T, _n, ref); \
             if(res != ref) \
             { \
-                log_info( "%ld) Failure for popcount( (%s%s) 0x%x ) = *%d vs %d\n", i, str(__T), sizeName, x, (int)ref, (int)res ); \
+                log_info( "%zu) Failure for popcount( (%s%s) 0x%x ) = *%d vs %d\n", i, str(__T), sizeName, x, (int)ref, (int)res ); \
                 return -1; \
             }\
         } \

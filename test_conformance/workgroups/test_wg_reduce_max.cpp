@@ -77,7 +77,7 @@ verify_wg_reduce_max_int(int *inptr, int *outptr, size_t n, size_t wg_size)
         {
             if ( max != outptr[i+j] )
             {
-                log_info("work_group_reduce_max int: Error at %u: expected = %d, got = %d\n", i+j, max, outptr[i+j]);
+                log_info("work_group_reduce_max int: Error at %zu: expected = %d, got = %d\n", i+j, max, outptr[i+j]);
                 return -1;
             }
         }
@@ -101,7 +101,7 @@ verify_wg_reduce_max_uint(unsigned int *inptr, unsigned int *outptr, size_t n, s
         {
             if ( max != outptr[i+j] )
             {
-                log_info("work_group_reduce_max uint: Error at %u: expected = %d, got = %d\n", i+j, max, outptr[i+j]);
+                log_info("work_group_reduce_max uint: Error at %zu: expected = %d, got = %d\n", i+j, max, outptr[i+j]);
                 return -1;
             }
         }
@@ -125,7 +125,7 @@ verify_wg_reduce_max_long(cl_long *inptr, cl_long *outptr, size_t n, size_t wg_s
         {
             if ( max != outptr[i+j] )
             {
-                log_info("work_group_reduce_max long: Error at %u: expected = %lld, got = %lld\n", i+j, max, outptr[i+j]);
+                log_info("work_group_reduce_max long: Error at %zu: expected = %lld, got = %lld\n", i+j, max, outptr[i+j]);
                 return -1;
             }
         }
@@ -149,7 +149,7 @@ verify_wg_reduce_max_ulong(cl_ulong *inptr, cl_ulong *outptr, size_t n, size_t w
         {
             if ( max != outptr[i+j] )
             {
-                log_info("work_group_reduce_max ulong: Error at %u: expected = %llu, got = %llu\n", i+j, max, outptr[i+j]);
+                log_info("work_group_reduce_max ulong: Error at %zu: expected = %llu, got = %llu\n", i+j, max, outptr[i+j]);
                 return -1;
             }
         }

@@ -2072,7 +2072,7 @@ public:
         if (gDebug)
         {
           hisId = (hisId + threadCount - 1) % threadCount;
-          printf("WI %d: atomic value (%d) at index %d is different than non-atomic value (%d)\n", tid, hisAtomicValue, hisId, hisValue);
+          printf("WI %d: atomic value (%d) at index %zu is different than non-atomic value (%d)\n", tid, hisAtomicValue, hisId, hisValue);
         }
       }
     }

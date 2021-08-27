@@ -314,29 +314,29 @@ int test_atomic_function(cl_device_id deviceID, cl_context context, cl_command_q
                 if( typeSize == 4 )
                 {
                     cl_int *outValue = (cl_int *)( destItems + i * typeSize );
-                    log_error( "ERROR: Result %ld from kernel does not validate! (should be %d, was %d)\n", i, intVal, *outValue );
+                    log_error( "ERROR: Result %zu from kernel does not validate! (should be %d, was %d)\n", i, intVal, *outValue );
                     cl_int *startRefs = (cl_int *)startRefValues;
                     cl_int *refs = (cl_int *)refValues;
                     for( i = 0; i < threadSize; i++ )
                     {
                         if( startRefs != NULL )
-                            log_info( " --- %ld - %d --- %d\n", i, startRefs[i], refs[i] );
+                            log_info( " --- %zu - %d --- %d\n", i, startRefs[i], refs[i] );
                         else
-                            log_info( " --- %ld --- %d\n", i, refs[i] );
+                            log_info( " --- %zu --- %d\n", i, refs[i] );
                     }
                 }
                 else
                 {
                     cl_long *outValue = (cl_long *)( destItems + i * typeSize );
-                    log_error( "ERROR: Result %ld from kernel does not validate! (should be %lld, was %lld)\n", i, longVal, *outValue );
+                    log_error( "ERROR: Result %zu from kernel does not validate! (should be %lld, was %lld)\n", i, longVal, *outValue );
                     cl_long *startRefs = (cl_long *)startRefValues;
                     cl_long *refs = (cl_long *)refValues;
                     for( i = 0; i < threadSize; i++ )
                     {
                         if( startRefs != NULL )
-                            log_info( " --- %ld - %lld --- %lld\n", i, startRefs[i], refs[i] );
+                            log_info( " --- %zu - %lld --- %lld\n", i, startRefs[i], refs[i] );
                         else
-                            log_info( " --- %ld --- %lld\n", i, refs[i] );
+                            log_info( " --- %zu --- %lld\n", i, refs[i] );
                     }
                 }
                 return -1;
@@ -548,7 +548,7 @@ bool test_atomic_xchg_verify_int( size_t size, cl_int *refValues, cl_int finalVa
         }
         if( refValues[ i ] < 0 || (size_t)refValues[ i ] >= size )
         {
-            log_error( "ERROR: Reference value %ld outside of valid range! (%d)\n", i, refValues[ i ] );
+            log_error( "ERROR: Reference value %zu outside of valid range! (%d)\n", i, refValues[ i ] );
             return false;
         }
         valids[ refValues[ i ] ] ++;
@@ -574,7 +574,7 @@ bool test_atomic_xchg_verify_int( size_t size, cl_int *refValues, cl_int finalVa
     {
         if( valids[ i ] != 1 )
         {
-            log_error( "ERROR: Reference value %ld did not occur once-and-only-once (occurred %d)\n", i, valids[ i ] );
+            log_error( "ERROR: Reference value %zu did not occur once-and-only-once (occurred %d)\n", i, valids[ i ] );
             for( size_t j = 0; j < size; j++ )
                 log_info( "%d: %d\n", (int)j, (int)valids[ j ] );
             return false;
@@ -605,7 +605,7 @@ bool test_atomic_xchg_verify_long( size_t size, cl_long *refValues, cl_long fina
         }
         if( refValues[ i ] < 0 || (size_t)refValues[ i ] >= size )
         {
-            log_error( "ERROR: Reference value %ld outside of valid range! (%lld)\n", i, refValues[ i ] );
+            log_error( "ERROR: Reference value %zu outside of valid range! (%lld)\n", i, refValues[ i ] );
             return false;
         }
         valids[ refValues[ i ] ] ++;
@@ -631,7 +631,7 @@ bool test_atomic_xchg_verify_long( size_t size, cl_long *refValues, cl_long fina
     {
         if( valids[ i ] != 1 )
         {
-            log_error( "ERROR: Reference value %ld did not occur once-and-only-once (occurred %d)\n", i, valids[ i ] );
+            log_error( "ERROR: Reference value %zu did not occur once-and-only-once (occurred %d)\n", i, valids[ i ] );
             for( size_t j = 0; j < size; j++ )
                 log_info( "%d: %d\n", (int)j, (int)valids[ j ] );
             return false;
@@ -663,7 +663,7 @@ bool test_atomic_xchg_verify_float( size_t size, cl_float *refValues, cl_float f
         }
         if( refValues[ i ] < 0 || (size_t)refValues[ i ] >= size )
         {
-            log_error( "ERROR: Reference value %ld outside of valid range! (%a)\n", i, refValues[ i ] );
+            log_error( "ERROR: Reference value %zu outside of valid range! (%a)\n", i, refValues[ i ] );
             return false;
         }
         valids[ (int)refValues[ i ] ] ++;
@@ -689,7 +689,7 @@ bool test_atomic_xchg_verify_float( size_t size, cl_float *refValues, cl_float f
     {
         if( valids[ i ] != 1 )
         {
-            log_error( "ERROR: Reference value %ld did not occur once-and-only-once (occurred %d)\n", i, valids[ i ] );
+            log_error( "ERROR: Reference value %zu did not occur once-and-only-once (occurred %d)\n", i, valids[ i ] );
             for( size_t j = 0; j < size; j++ )
                 log_info( "%d: %d\n", (int)j, (int)valids[ j ] );
             return false;

@@ -236,7 +236,7 @@ int test_sampler_params(cl_device_id deviceID, cl_context context,
             if (set_size != 0)
             {
                 log_error(
-                    "ERROR: CL_SAMPLER_PROPERTIES size is %d, expected 0\n",
+                    "ERROR: CL_SAMPLER_PROPERTIES size is %zu, expected 0\n",
                     set_size);
                 return TEST_FAIL;
             }
@@ -247,7 +247,7 @@ int test_sampler_params(cl_device_id deviceID, cl_context context,
                 != test_properties.size() * sizeof(cl_sampler_properties))
             {
                 log_error(
-                    "ERROR: CL_SAMPLER_PROPERTIES size is %d, expected %d.\n",
+                    "ERROR: CL_SAMPLER_PROPERTIES size is %zu, expected %zu.\n",
                     set_size,
                     test_properties.size() * sizeof(cl_sampler_properties));
                 return TEST_FAIL;

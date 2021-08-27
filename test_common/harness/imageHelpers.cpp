@@ -421,7 +421,7 @@ void print_first_pixel_difference_error(size_t where, const char *sourcePixel,
               (int)thirdDim, (int)imageInfo->rowPitch,
               (int)imageInfo->rowPitch
                   - (int)imageInfo->width * (int)pixel_size);
-    log_error("Failed at column: %ld   ", where);
+    log_error("Failed at column: %zu   ", where);
 
     switch (pixel_size)
     {
@@ -473,7 +473,7 @@ void print_first_pixel_difference_error(size_t where, const char *sourcePixel,
                       ((cl_uint *)destPixel)[2], ((cl_uint *)destPixel)[3]);
             break;
         default:
-            log_error("Don't know how to print pixel size of %ld\n",
+            log_error("Don't know how to print pixel size of %zu\n",
                       pixel_size);
             break;
     }

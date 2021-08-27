@@ -198,7 +198,7 @@ int test_local_arg_def(cl_device_id device, cl_context context, cl_command_queue
 
   // Adjust the local thread size to fit and be a nice multiple.
   if (kwgsize < wgsize) {
-    log_info("Adjusting wgsize down from %lu to %lu.\n", wgsize, kwgsize);
+    log_info("Adjusting wgsize down from %zu to %zu.\n", wgsize, kwgsize);
         local_threads[0] = kwgsize;
   }
   while (global_threads[0] % local_threads[0] != 0)
@@ -331,7 +331,7 @@ int test_local_kernel_def(cl_device_id device, cl_context context, cl_command_qu
 
   // Adjust the local thread size to fit and be a nice multiple.
   if (kwgsize < wgsize) {
-    log_info("Adjusting wgsize down from %lu to %lu.\n", wgsize, kwgsize);
+    log_info("Adjusting wgsize down from %zu to %zu.\n", wgsize, kwgsize);
         local_threads[0] = kwgsize;
   }
   while (global_threads[0] % local_threads[0] != 0)

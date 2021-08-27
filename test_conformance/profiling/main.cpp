@@ -72,7 +72,7 @@ int check_times(cl_ulong queueStart, cl_ulong commandSubmit, cl_ulong commandSta
   err = clGetDeviceInfo(device, CL_DEVICE_PROFILING_TIMER_RESOLUTION, sizeof(profiling_resolution), &profiling_resolution, NULL);
     test_error(err, "clGetDeviceInfo for CL_DEVICE_PROFILING_TIMER_RESOLUTION failed.\n");
 
-  log_info("CL_PROFILING_COMMAND_QUEUED: %llu CL_PROFILING_COMMAND_SUBMIT: %llu CL_PROFILING_COMMAND_START: %llu CL_PROFILING_COMMAND_END: %llu CL_DEVICE_PROFILING_TIMER_RESOLUTION: %ld\n",
+  log_info("CL_PROFILING_COMMAND_QUEUED: %llu CL_PROFILING_COMMAND_SUBMIT: %llu CL_PROFILING_COMMAND_START: %llu CL_PROFILING_COMMAND_END: %llu CL_DEVICE_PROFILING_TIMER_RESOLUTION: %zu\n",
            queueStart, commandSubmit, commandStart, commandEnd, profiling_resolution);
 
   double queueTosubmitTimeS = (double)(commandSubmit - queueStart)*1e-9;

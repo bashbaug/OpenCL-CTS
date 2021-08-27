@@ -212,7 +212,7 @@ int test_sizeof(cl_device_id device, cl_context context, cl_command_queue queue,
             }
 
             char name[32];
-            sprintf( name, "%s%ld", vector_table[i].name, j );
+            sprintf( name, "%s%zu", vector_table[i].name, j );
 
             test = CL_ULONG_MAX;
             err = get_type_size( context, queue, name, &test, device  );
@@ -340,7 +340,7 @@ int test_sizeof(cl_device_id device, cl_context context, cl_command_queue queue,
         for( j = 2; j <= 16; j *= 2 )
         {
             char name[32];
-            sprintf( name, "double%ld", j );
+            sprintf( name, "double%zu", j );
 
             test = CL_ULONG_MAX;
             err = get_type_size( context, queue, name, &test, device );
@@ -348,7 +348,7 @@ int test_sizeof(cl_device_id device, cl_context context, cl_command_queue queue,
                 return err;
             if( test != 8*j )
             {
-                log_error( "\nFAILED: %s has size %lld, but must be %ld!\n", name, test, 8 * j);
+                log_error( "\nFAILED: %s has size %lld, but must be %zu!\n", name, test, 8 * j);
                 return -1;
             }
             log_info( "%16s", name );
@@ -375,7 +375,7 @@ int test_sizeof(cl_device_id device, cl_context context, cl_command_queue queue,
         for( j = 2; j <= 16; j *= 2 )
         {
             char name[32];
-            sprintf( name, "half%ld", j );
+            sprintf( name, "half%zu", j );
 
             test = CL_ULONG_MAX;
             err = get_type_size( context, queue, name, &test, device );
@@ -383,7 +383,7 @@ int test_sizeof(cl_device_id device, cl_context context, cl_command_queue queue,
                 return err;
             if( test != 2*j )
             {
-                log_error( "\nFAILED: %s has size %lld, but must be %ld!\n", name, test, 2 * j);
+                log_error( "\nFAILED: %s has size %lld, but must be %zu!\n", name, test, 2 * j);
                 return -1;
             }
             log_info( "%16s", name );

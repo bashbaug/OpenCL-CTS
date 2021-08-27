@@ -189,7 +189,7 @@ int test_get_platform_ids(cl_device_id deviceID, cl_context context, cl_command_
     test_error(err, "clGetPlatformInfo for CL_PLATFORM_PROFILE failed");
     log_info("\tCL_PLATFORM_PROFILE: %s\n", string_returned);
     if (strlen(string_returned)+1 != size) {
-      log_error("Returned string length %ld does not equal reported one %ld.\n", strlen(string_returned)+1, size);
+      log_error("Returned string length %zu does not equal reported one %zu.\n", strlen(string_returned)+1, size);
       total_errors++;
     }
 
@@ -198,7 +198,7 @@ int test_get_platform_ids(cl_device_id deviceID, cl_context context, cl_command_
     test_error(err, "clGetPlatformInfo for CL_PLATFORM_VERSION failed");
     log_info("\tCL_PLATFORM_VERSION: %s\n", string_returned);
     if (strlen(string_returned)+1 != size) {
-      log_error("Returned string length %ld does not equal reported one %ld.\n", strlen(string_returned)+1, size);
+      log_error("Returned string length %zu does not equal reported one %zu.\n", strlen(string_returned)+1, size);
       total_errors++;
     }
 
@@ -207,7 +207,7 @@ int test_get_platform_ids(cl_device_id deviceID, cl_context context, cl_command_
     test_error(err, "clGetPlatformInfo for CL_PLATFORM_NAME failed");
     log_info("\tCL_PLATFORM_NAME: %s\n", string_returned);
     if (strlen(string_returned)+1 != size) {
-      log_error("Returned string length %ld does not equal reported one %ld.\n", strlen(string_returned)+1, size);
+      log_error("Returned string length %zu does not equal reported one %zu.\n", strlen(string_returned)+1, size);
       total_errors++;
     }
 
@@ -216,7 +216,7 @@ int test_get_platform_ids(cl_device_id deviceID, cl_context context, cl_command_
     test_error(err, "clGetPlatformInfo for CL_PLATFORM_VENDOR failed");
     log_info("\tCL_PLATFORM_VENDOR: %s\n", string_returned);
     if (strlen(string_returned)+1 != size) {
-      log_error("Returned string length %ld does not equal reported one %ld.\n", strlen(string_returned)+1, size);
+      log_error("Returned string length %zu does not equal reported one %zu.\n", strlen(string_returned)+1, size);
       total_errors++;
     }
 
@@ -225,7 +225,7 @@ int test_get_platform_ids(cl_device_id deviceID, cl_context context, cl_command_
     test_error(err, "clGetPlatformInfo for CL_PLATFORM_EXTENSIONS failed");
     log_info("\tCL_PLATFORM_EXTENSIONS: %s\n", string_returned);
     if (strlen(string_returned)+1 != size) {
-      log_error("Returned string length %ld does not equal reported one %ld.\n", strlen(string_returned)+1, size);
+      log_error("Returned string length %zu does not equal reported one %zu.\n", strlen(string_returned)+1, size);
       total_errors++;
     }
 
@@ -246,7 +246,7 @@ int test_get_platform_ids(cl_device_id deviceID, cl_context context, cl_command_
       err = clGetDeviceInfo(devices[d], CL_DEVICE_PLATFORM, sizeof(cl_platform_id), &returned_platform, &returned_size);
       test_error(err, "clGetDeviceInfo failed for CL_DEVICE_PLATFORM\n");
       if (returned_size != sizeof(cl_platform_id)) {
-        log_error("Reported return size (%ld) does not match expected size (%ld).\n", returned_size, sizeof(cl_platform_id));
+        log_error("Reported return size (%zu) does not match expected size (%zu).\n", returned_size, sizeof(cl_platform_id));
         total_errors++;
       }
 
@@ -266,7 +266,7 @@ int test_get_platform_ids(cl_device_id deviceID, cl_context context, cl_command_
       err = clGetContextInfo(context, CL_CONTEXT_PROPERTIES, sizeof(cl_context_properties)*3, properties, &returned_size);
       test_error(err, "clGetContextInfo for CL_CONTEXT_PROPERTIES failed");
       if (returned_size != sizeof(cl_context_properties)*3) {
-        log_error("Invalid size returned from clGetContextInfo for CL_CONTEXT_PROPERTIES. Got %ld, expected %ld.\n",
+        log_error("Invalid size returned from clGetContextInfo for CL_CONTEXT_PROPERTIES. Got %zu, expected %zu.\n",
                   returned_size, sizeof(cl_context_properties)*3);
         total_errors++;
       }

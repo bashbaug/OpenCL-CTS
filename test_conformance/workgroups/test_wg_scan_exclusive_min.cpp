@@ -101,7 +101,7 @@ verify_wg_scan_exclusive_min_uint(unsigned int *inptr, unsigned int *outptr, siz
 
         for (i = 0; i < m; ++i) {
             if (outptr[j+i] != min_) {
-                log_info("work_group_scan_exclusive_min int: Error at %u: expected = %u, got = %u\n", j+i, min_, outptr[j+i]);
+                log_info("work_group_scan_exclusive_min int: Error at %zu: expected = %u, got = %u\n", j+i, min_, outptr[j+i]);
                 return -1;
             }
             min_ = MIN(inptr[j+i], min_);

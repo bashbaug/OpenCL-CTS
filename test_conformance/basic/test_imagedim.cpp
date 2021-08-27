@@ -111,7 +111,7 @@ test_imagedim_pow2(cl_device_id device, cl_context context, cl_command_queue que
         log_error("clGetDeviceInfo for CL_DEVICE_IMAGE2D_MAX_HEIGHT failed (%d)\n", err);
         return -1;
     }
-    log_info("Device reported max image sizes of %lu x %lu, and max mem size of %gMB.\n",
+    log_info("Device reported max image sizes of %zu x %zu, and max mem size of %gMB.\n",
            max_image2d_width, max_image2d_height, max_mem_size/(1024.0*1024.0));
 
     if (max_mem_size > (cl_ulong)SIZE_MAX) {
@@ -147,7 +147,7 @@ test_imagedim_pow2(cl_device_id device, cl_context context, cl_command_queue que
     if (max_img_height > max_img_dim)
         max_img_height = max_img_dim;
 
-    log_info("Adjusted maximum image size to test is %d x %d, which is a max mem size of %gMB.\n",
+    log_info("Adjusted maximum image size to test is %zu x %zu, which is a max mem size of %gMB.\n",
                 max_img_width, max_img_height, (max_img_width*max_img_height*4)/(1024.0*1024.0));
 
     d = init_genrand( gRandomSeed );
@@ -170,7 +170,7 @@ test_imagedim_pow2(cl_device_id device, cl_context context, cl_command_queue que
                                 img_width, img_height, 0, NULL, NULL);
             if (!streams[0])
             {
-                log_error("create_image_2d failed.  width = %d, height = %d\n", img_width, img_height);
+                log_error("create_image_2d failed.  width = %zu, height = %zu\n", img_width, img_height);
                 delete[] input_ptr;
                 delete[] output_ptr;
                 free_mtdata(d);
@@ -183,7 +183,7 @@ test_imagedim_pow2(cl_device_id device, cl_context context, cl_command_queue que
                                 img_width, img_height, 0, NULL, NULL);
             if (!streams[1])
             {
-                log_error("create_image_2d failed.  width = %d, height = %d\n", img_width, img_height);
+                log_error("create_image_2d failed.  width = %zu, height = %zu\n", img_width, img_height);
                 clReleaseMemObject(streams[0]);
                 delete[] input_ptr;
                 delete[] output_ptr;
@@ -221,12 +221,12 @@ test_imagedim_pow2(cl_device_id device, cl_context context, cl_command_queue que
 
             threads[0] = (size_t)img_width;
             threads[1] = (size_t)img_height;
-            log_info("Testing image dimensions %d x %d with local threads NULL.\n", img_width, img_height);
+            log_info("Testing image dimensions %zu x %zu with local threads NULL.\n", img_width, img_height);
             err = clEnqueueNDRangeKernel( queue, kernel, 2, NULL, threads, NULL, 0, NULL, NULL );
             if (err != CL_SUCCESS)
             {
                 log_error("clEnqueueNDRangeKernel failed\n");
-                log_error("Image Dimension test failed.  image width = %d, image height = %d, local NULL\n",
+                log_error("Image Dimension test failed.  image width = %zu, image height = %zu, local NULL\n",
                             img_width, img_height);
                 clReleaseMemObject(streams[0]);
                 clReleaseMemObject(streams[1]);
@@ -239,7 +239,7 @@ test_imagedim_pow2(cl_device_id device, cl_context context, cl_command_queue que
             if (err != CL_SUCCESS)
             {
                 log_error("clReadImage failed\n");
-                log_error("Image Dimension test failed.  image width = %d, image height = %d, local NULL\n",
+                log_error("Image Dimension test failed.  image width = %zu, image height = %zu, local NULL\n",
                             img_width, img_height);
                 clReleaseMemObject(streams[0]);
                 clReleaseMemObject(streams[1]);
@@ -252,7 +252,7 @@ test_imagedim_pow2(cl_device_id device, cl_context context, cl_command_queue que
             if (err)
             {
                 total_errors++;
-                log_error("Image Dimension test failed.  image width = %d, image height = %d\n", img_width, img_height);
+                log_error("Image Dimension test failed.  image width = %zu, image height = %zu\n", img_width, img_height);
             }
 
             clReleaseMemObject(streams[0]);
@@ -326,7 +326,7 @@ test_imagedim_non_pow2(cl_device_id device, cl_context context, cl_command_queue
         log_error("clGetDeviceInfo for CL_DEVICE_IMAGE2D_MAX_HEIGHT failed (%d)\n", err);
         return -1;
     }
-    log_info("Device reported max image sizes of %lu x %lu, and max mem size of %gMB.\n",
+    log_info("Device reported max image sizes of %zu x %zu, and max mem size of %gMB.\n",
            max_image2d_width, max_image2d_height, max_mem_size/(1024.0*1024.0));
 
     cl_sampler sampler = clCreateSampler(context, CL_FALSE, CL_ADDRESS_CLAMP_TO_EDGE, CL_FILTER_NEAREST, &err);
@@ -362,7 +362,7 @@ test_imagedim_non_pow2(cl_device_id device, cl_context context, cl_command_queue
     if (max_img_height > max_img_dim)
         max_img_height = max_img_dim;
 
-    log_info("Adjusted maximum image size to test is %d x %d, which is a max mem size of %gMB.\n",
+    log_info("Adjusted maximum image size to test is %zu x %zu, which is a max mem size of %gMB.\n",
             max_img_width, max_img_height, (max_img_width*max_img_height*4)/(1024.0*1024.0));
 
     d = init_genrand( gRandomSeed );
@@ -415,7 +415,7 @@ test_imagedim_non_pow2(cl_device_id device, cl_context context, cl_command_queue
                     effective_img_width, effective_img_height, 0, NULL, NULL);
                 if (!streams[0])
                 {
-                    log_error("create_image_2d failed.  width = %d, height = %d\n", effective_img_width, effective_img_height);
+                    log_error("create_image_2d failed.  width = %zu, height = %zu\n", effective_img_width, effective_img_height);
                     delete[] input_ptr;
                     delete[] output_ptr;
                     free_mtdata(d);
@@ -428,7 +428,7 @@ test_imagedim_non_pow2(cl_device_id device, cl_context context, cl_command_queue
                     effective_img_width, effective_img_height, 0, NULL, NULL);
                 if (!streams[1])
                 {
-                    log_error("create_image_2d failed.  width = %d, height = %d\n", effective_img_width, effective_img_height);
+                    log_error("create_image_2d failed.  width = %zu, height = %zu\n", effective_img_width, effective_img_height);
                     clReleaseMemObject(streams[0]);
                     delete[] input_ptr;
                     delete[] output_ptr;
@@ -466,13 +466,13 @@ test_imagedim_non_pow2(cl_device_id device, cl_context context, cl_command_queue
 
                 threads[0] = (size_t)effective_img_width;
                 threads[1] = (size_t)effective_img_height;
-                log_info("Testing image dimensions %d x %d with local threads %d x %d.\n",
+                log_info("Testing image dimensions %zu x %zu with local threads %d x %d.\n",
                             effective_img_width, effective_img_height, (int)local_threads[0], (int)local_threads[1]);
                 err = clEnqueueNDRangeKernel( queue, kernel, 2, NULL, threads, local_threads, 0, NULL, NULL );
                 if (err != CL_SUCCESS)
                 {
                     log_error("clEnqueueNDRangeKernel failed\n");
-                    log_error("Image Dimension test failed.  image width = %d, image height = %d, local %d x %d\n",
+                    log_error("Image Dimension test failed.  image width = %zu, image height = %zu, local %d x %d\n",
                                 effective_img_width, effective_img_height, (int)local_threads[0], (int)local_threads[1]);
                     clReleaseMemObject(streams[0]);
                     clReleaseMemObject(streams[1]);
@@ -485,7 +485,7 @@ test_imagedim_non_pow2(cl_device_id device, cl_context context, cl_command_queue
                 if (err != CL_SUCCESS)
                 {
                     log_error("clReadImage failed\n");
-                    log_error("Image Dimension test failed.  image width = %d, image height = %d, local %d x %d\n",
+                    log_error("Image Dimension test failed.  image width = %zu, image height = %zu, local %d x %d\n",
                                 effective_img_width, effective_img_height, (int)local_threads[0], (int)local_threads[1]);
                     clReleaseMemObject(streams[0]);
                     clReleaseMemObject(streams[1]);
@@ -498,7 +498,9 @@ test_imagedim_non_pow2(cl_device_id device, cl_context context, cl_command_queue
                 if (err)
                 {
                     total_errors++;
-                    log_error("Image Dimension test failed.  image width = %d, image height = %d\n", effective_img_width, effective_img_height);
+                    log_error("Image Dimension test failed.  image width = "
+                              "%zu, image height = %zu\n",
+                              effective_img_width, effective_img_height);
                 }
 
                 clReleaseMemObject(streams[0]);

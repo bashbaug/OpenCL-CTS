@@ -181,11 +181,11 @@ int test_intmath(cl_device_id device, cl_context context,
             if (r != output[i])
             {
                 log_error("\n\nverification failed at index %d\n", i);
-                log_error("-> inputs: %llu, %llu, %llu\n",
+                log_error("-> inputs: %u, %u, %u\n",
                           static_cast<cl_uint>(inputA[i]),
                           static_cast<cl_uint>(inputB[i]),
                           static_cast<cl_uint>(inputC[i]));
-                log_error("-> expected %llu, got %llu\n\n",
+                log_error("-> expected %u, got %u\n\n",
                           static_cast<cl_uint>(r),
                           static_cast<cl_uint>(output[i]));
                 return TEST_FAIL;

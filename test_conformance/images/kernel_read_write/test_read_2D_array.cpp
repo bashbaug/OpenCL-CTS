@@ -98,7 +98,7 @@ template <class T> int determine_validation_error_offset_2D_array( void *imagePt
                 log_error( "\nERROR: TEST FAILED! Read is erroneously clamping coordinates!\n" );
                 if( printAsFloat )
                 {
-                    log_error( "Sample %ld: coord {%f(%a),%f(%a),%f(%a)} did not validate!\n"
+                    log_error( "Sample %zu: coord {%f(%a),%f(%a),%f(%a)} did not validate!\n"
                                "   Expected (%g,%g,%g,%g)\n"
                                "   Observed (%g,%g,%g,%g)\n"
                                "   error of %g\n",
@@ -107,7 +107,7 @@ template <class T> int determine_validation_error_offset_2D_array( void *imagePt
                 }
                 else
                 {
-                    log_error( "Sample %ld: coord {%f(%a),%f(%a),%f(%a)} did not validate!\n"
+                    log_error( "Sample %zu: coord {%f(%a),%f(%a),%f(%a)} did not validate!\n"
                                "   Expected (%x,%x,%x,%x)\n"
                                "   Observed (%x,%x,%x,%x)\n",
                                j, x, x, y, y, z, z, (int)expected[ 0 ], (int)expected[ 1 ], (int)expected[ 2 ], (int)expected[ 3 ],
@@ -139,7 +139,7 @@ template <class T> int determine_validation_error_offset_2D_array( void *imagePt
                 log_error( "\nERROR: TEST FAILED: Clamping is erroneously returning border color!\n" );
                 if( printAsFloat )
                 {
-                    log_error( "Sample %ld: coord {%f(%a),%f(%a),%f(%a)} did not validate!\n"
+                    log_error( "Sample %zu: coord {%f(%a),%f(%a),%f(%a)} did not validate!\n"
                                "   Expected (%g,%g,%g,%g)\n"
                                "   Observed (%g,%g,%g,%g)\n"
                                "   error of %g\n",
@@ -148,7 +148,7 @@ template <class T> int determine_validation_error_offset_2D_array( void *imagePt
                 }
                 else
                 {
-                    log_error( "Sample %ld: coord {%f(%a),%f(%a),%f(%a)} did not validate!\n"
+                    log_error( "Sample %zu: coord {%f(%a),%f(%a),%f(%a)} did not validate!\n"
                                "   Expected (%x,%x,%x,%x)\n"
                                "   Observed (%x,%x,%x,%x)\n",
                                j, x, x, y, y, z, z, (int)expected[ 0 ], (int)expected[ 1 ], (int)expected[ 2 ], (int)expected[ 3 ],
@@ -165,7 +165,7 @@ template <class T> int determine_validation_error_offset_2D_array( void *imagePt
         {
             if( printAsFloat )
             {
-                log_error( "Sample %ld: coord {%f(%a),%f(%a),%f(%a)} did not validate!\n"
+                log_error( "Sample %zu: coord {%f(%a),%f(%a),%f(%a)} did not validate!\n"
                     "   Expected (%g,%g,%g,%g)\n"
                     "   Observed (%g,%g,%g,%g)\n"
                     "   error of %g\n",
@@ -174,7 +174,7 @@ template <class T> int determine_validation_error_offset_2D_array( void *imagePt
             }
             else
             {
-                log_error( "Sample %ld: coord {%f(%a),%f(%a),%f(%a)} did not validate!\n"
+                log_error( "Sample %zu: coord {%f(%a),%f(%a),%f(%a)} did not validate!\n"
                     "   Expected (%x,%x,%x,%x)\n"
                     "   Observed (%x,%x,%x,%x)\n",
                     j, x, x, y, y, z, z, (int)expected[ 0 ], (int)expected[ 1 ], (int)expected[ 2 ], (int)expected[ 3 ],
@@ -533,7 +533,7 @@ int test_read_image_2D_array( cl_context context, cl_command_queue queue, cl_ker
         if( gTestMipmaps )
         {
             if(gDebugTrace)
-                log_info(" - Working at mip level %d\n", lod);
+                log_info(" - Working at mip level %zu\n", lod);
             error = clSetKernelArg( kernel, idx, sizeof(float), &lod_float);
         }
     for( int q = 0; q < loopCount; q++ )

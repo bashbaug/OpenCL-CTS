@@ -227,7 +227,7 @@ int test_get_buffer_info( cl_device_id deviceID, cl_context context, cl_command_
         TEST_MEM_OBJECT_PARAM( bufferObject, CL_MEM_FLAGS, flags, (unsigned int)bufferFlags[ i ], "flags", "%d", unsigned int )
 
         size_t sz;
-        TEST_MEM_OBJECT_PARAM( bufferObject, CL_MEM_SIZE, sz, (size_t)( addressAlign * 4 ), "size", "%ld", size_t )
+        TEST_MEM_OBJECT_PARAM( bufferObject, CL_MEM_SIZE, sz, (size_t)( addressAlign * 4 ), "size", "%zu", size_t )
 
         cl_uint mapCount;
         error = clGetMemObjectInfo( bufferObject, CL_MEM_MAP_COUNT, sizeof( mapCount ), &mapCount, &size );
@@ -256,7 +256,7 @@ int test_get_buffer_info( cl_device_id deviceID, cl_context context, cl_command_
         TEST_MEM_OBJECT_PARAM( bufferObject, CL_MEM_ASSOCIATED_MEMOBJECT, origObj, (void *)NULL, "associated mem object", "%p", void * )
 
         size_t offset;
-        TEST_MEM_OBJECT_PARAM( bufferObject, CL_MEM_OFFSET, offset, 0L, "offset", "%ld", size_t )
+        TEST_MEM_OBJECT_PARAM( bufferObject, CL_MEM_OFFSET, offset, (size_t)0, "offset", "%zu", size_t )
 
         cl_buffer_region region;
         region.origin = addressAlign;
@@ -312,7 +312,7 @@ int test_get_buffer_info( cl_device_id deviceID, cl_context context, cl_command_
             }
             TEST_MEM_OBJECT_PARAM( subBufferObject, CL_MEM_FLAGS, flags, (unsigned int)inheritedFlags, "flags", "%d", unsigned int )
 
-            TEST_MEM_OBJECT_PARAM( subBufferObject, CL_MEM_SIZE, sz, (size_t)( addressAlign ), "size", "%ld", size_t )
+            TEST_MEM_OBJECT_PARAM( subBufferObject, CL_MEM_SIZE, sz, (size_t)( addressAlign ), "size", "%zu", size_t )
 
             if ( bufferFlags[ i ] & CL_MEM_USE_HOST_PTR )
             {
@@ -347,7 +347,7 @@ int test_get_buffer_info( cl_device_id deviceID, cl_context context, cl_command_
 
             TEST_MEM_OBJECT_PARAM( subBufferObject, CL_MEM_ASSOCIATED_MEMOBJECT, origObj, (cl_mem)bufferObject, "associated mem object", "%p", void * )
 
-            TEST_MEM_OBJECT_PARAM( subBufferObject, CL_MEM_OFFSET, offset, (size_t)( addressAlign ), "offset", "%ld", size_t )
+            TEST_MEM_OBJECT_PARAM( subBufferObject, CL_MEM_OFFSET, offset, (size_t)( addressAlign ), "offset", "%zu", size_t )
         }
     }
 
@@ -363,8 +363,6 @@ int test_get_imageObject_info( cl_mem * image, cl_mem_flags objectFlags, cl_imag
     cl_mem_flags flags;
     cl_uint mapCount;
     cl_uint refCount;
-    size_t rowPitchMultiplier;
-    size_t slicePitchMultiplier;
     cl_context otherCtx;
     size_t offset;
     size_t sz;
@@ -398,7 +396,7 @@ int test_get_imageObject_info( cl_mem * image, cl_mem_flags objectFlags, cl_imag
 
     TEST_MEM_OBJECT_PARAM( *image, CL_MEM_CONTEXT, otherCtx, context, "context", "%p", cl_context )
 
-    TEST_MEM_OBJECT_PARAM( *image, CL_MEM_OFFSET, offset, 0L, "offset", "%ld", size_t )
+    TEST_MEM_OBJECT_PARAM( *image, CL_MEM_OFFSET, offset, (size_t)0, "offset", "%zu", size_t )
 
     return CL_SUCCESS;
 }

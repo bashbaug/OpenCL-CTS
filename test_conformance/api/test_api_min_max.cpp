@@ -201,10 +201,10 @@ int test_min_max_work_items_sizes(cl_device_id deviceID, cl_context context, cl_
     int errors = 0;
     for(i=0; i<maxWorkItemDim; i++) {
         if (deviceMaxWorkItemSize[i]<1) {
-            log_error("MAX_WORK_ITEM_SIZE in dimension %d is invalid: %lu\n", i, deviceMaxWorkItemSize[i]);
+            log_error("MAX_WORK_ITEM_SIZE in dimension %d is invalid: %zu\n", i, deviceMaxWorkItemSize[i]);
             errors++;
         } else {
-            log_info("Dimension %d has max work item size %lu\n", i, deviceMaxWorkItemSize[i]);
+            log_info("Dimension %d has max work item size %zu\n", i, deviceMaxWorkItemSize[i]);
         }
     }
 
@@ -226,7 +226,7 @@ int test_min_max_work_group_size(cl_device_id deviceID, cl_context context, cl_c
     error = clGetDeviceInfo( deviceID, CL_DEVICE_MAX_WORK_GROUP_SIZE, sizeof( deviceMaxThreadSize ), &deviceMaxThreadSize, NULL );
     test_error( error, "Unable to get max work group size from device" );
 
-    log_info("Reported %ld max device work group size.\n", deviceMaxThreadSize);
+    log_info("Reported %zu max device work group size.\n", deviceMaxThreadSize);
 
     if( deviceMaxThreadSize == 0 )
     {
@@ -554,8 +554,6 @@ int test_min_max_image_2d_width(cl_device_id deviceID, cl_context context, cl_co
     cl_image_format image_format_desc;
     cl_ulong maxAllocSize;
     cl_uint minRequiredDimension;
-    size_t length;
-
 
     PASSIVE_REQUIRE_IMAGE_SUPPORT( deviceID )
 
@@ -583,7 +581,7 @@ int test_min_max_image_2d_width(cl_device_id deviceID, cl_context context, cl_co
         log_error( "ERROR: Reported max image 2d width is less than required! (%d)\n", (int)maxDimension );
         return -1;
     }
-    log_info("Max reported width is %ld.\n", maxDimension);
+    log_info("Max reported width is %zu.\n", maxDimension);
 
     /* Verify we can use the format */
     image_format_desc.image_channel_data_type = CL_UNORM_INT8;
@@ -623,7 +621,6 @@ int test_min_max_image_2d_height(cl_device_id deviceID, cl_context context, cl_c
     cl_image_format image_format_desc;
     cl_ulong maxAllocSize;
     cl_uint minRequiredDimension;
-    size_t length;
 
     PASSIVE_REQUIRE_IMAGE_SUPPORT( deviceID )
 
@@ -650,7 +647,7 @@ int test_min_max_image_2d_height(cl_device_id deviceID, cl_context context, cl_c
         log_error( "ERROR: Reported max image 2d height is less than required! (%d)\n", (int)maxDimension );
         return -1;
     }
-    log_info("Max reported height is %ld.\n", maxDimension);
+    log_info("Max reported height is %zu.\n", maxDimension);
 
     /* Verify we can use the format */
     image_format_desc.image_channel_data_type = CL_UNORM_INT8;
@@ -707,7 +704,7 @@ int test_min_max_image_3d_width(cl_device_id deviceID, cl_context context, cl_co
         log_error( "ERROR: Reported max image 3d width is less than required! (%d)\n", (int)maxDimension );
         return -1;
     }
-    log_info("Max reported width is %ld.\n", maxDimension);
+    log_info("Max reported width is %zu.\n", maxDimension);
 
     /* Verify we can use the format */
     image_format_desc.image_channel_data_type = CL_UNORM_INT8;
@@ -764,7 +761,7 @@ int test_min_max_image_3d_height(cl_device_id deviceID, cl_context context, cl_c
         log_error( "ERROR: Reported max image 3d height is less than required! (%d)\n", (int)maxDimension );
         return -1;
     }
-    log_info("Max reported height is %ld.\n", maxDimension);
+    log_info("Max reported height is %zu.\n", maxDimension);
 
     /* Verify we can use the format */
     image_format_desc.image_channel_data_type = CL_UNORM_INT8;
@@ -822,7 +819,7 @@ int test_min_max_image_3d_depth(cl_device_id deviceID, cl_context context, cl_co
         log_error( "ERROR: Reported max image 3d depth is less than required! (%d)\n", (int)maxDimension );
         return -1;
     }
-    log_info("Max reported depth is %ld.\n", maxDimension);
+    log_info("Max reported depth is %zu.\n", maxDimension);
 
     /* Verify we can use the format */
     image_format_desc.image_channel_data_type = CL_UNORM_INT8;
@@ -878,7 +875,7 @@ int test_min_max_image_array_size(cl_device_id deviceID, cl_context context, cl_
         log_error( "ERROR: Reported max image array size is less than required! (%d)\n", (int)maxDimension );
         return -1;
     }
-    log_info("Max reported image array size is %ld.\n", maxDimension);
+    log_info("Max reported image array size is %zu.\n", maxDimension);
 
     /* Verify we can use the format */
     image_format_desc.image_channel_data_type = CL_UNORM_INT8;
@@ -936,7 +933,7 @@ int test_min_max_image_buffer_size(cl_device_id deviceID, cl_context context, cl
         log_error( "ERROR: Reported max image buffer size is less than required! (%d)\n", (int)maxDimensionPixels );
         return -1;
     }
-    log_info("Max reported image buffer size is %ld pixels.\n", maxDimensionPixels);
+    log_info("Max reported image buffer size is %zu pixels.\n", maxDimensionPixels);
 
     pixelBytes = maxAllocSize / maxDimensionPixels;
     if ( pixelBytes == 0 )
@@ -1030,13 +1027,13 @@ int test_min_max_parameter_size(cl_device_id deviceID, cl_context context, cl_co
 
         if (embeddedNoLong)
         {
-            log_info("Trying a kernel with %ld int arguments (%ld bytes) and one cl_mem (%ld bytes) for %ld bytes total.\n",
+            log_info("Trying a kernel with %ld int arguments (%zu bytes) and one cl_mem (%zu bytes) for %zu bytes total.\n",
                      numberOfIntParametersToTry, sizeof(cl_int)*numberOfIntParametersToTry, sizeof(cl_mem),
                      sizeof(cl_mem)+numberOfIntParametersToTry*sizeof(cl_int));
         }
         else
         {
-            log_info("Trying a kernel with %ld long arguments (%ld bytes) and one cl_mem (%ld bytes) for %ld bytes total.\n",
+            log_info("Trying a kernel with %ld long arguments (%zu bytes) and one cl_mem (%zu bytes) for %zu bytes total.\n",
                      numberOfIntParametersToTry, sizeof(cl_long)*numberOfIntParametersToTry, sizeof(cl_mem),
                      sizeof(cl_mem)+numberOfIntParametersToTry*sizeof(cl_long));
         }
@@ -1162,7 +1159,7 @@ int test_min_max_parameter_size(cl_device_id deviceID, cl_context context, cl_co
                 numberOfIntParametersToTry -= decrement;
                 continue;
             } else {
-                log_info("Results verified at %ld bytes of arguments.\n", sizeof(cl_mem)+numberOfIntParametersToTry*sizeof(cl_long));
+                log_info("Results verified at %zu bytes of arguments.\n", sizeof(cl_mem)+numberOfIntParametersToTry*sizeof(cl_long));
                 break;
             }
         }
@@ -1173,7 +1170,7 @@ int test_min_max_parameter_size(cl_device_id deviceID, cl_context context, cl_co
                 numberOfIntParametersToTry -= decrement;
                 continue;
             } else {
-                log_info("Results verified at %ld bytes of arguments.\n", sizeof(cl_mem)+numberOfIntParametersToTry*sizeof(cl_int));
+                log_info("Results verified at %zu bytes of arguments.\n", sizeof(cl_mem)+numberOfIntParametersToTry*sizeof(cl_int));
                 break;
             }
         }
@@ -1818,11 +1815,11 @@ int test_min_max_kernel_preferred_work_group_size_multiple(cl_device_id deviceID
 
     // Since the preferred size is only a performance hint, we can only really check that we get a sane value
     // back
-    log_info( "size: %ld     preferred: %ld      max: %ld\n", max_workgroup_size, preferred_workgroup_size, max_local_workgroup_size[0] );
+    log_info( "size: %zu     preferred: %zu      max: %zu\n", max_workgroup_size, preferred_workgroup_size, max_local_workgroup_size[0] );
 
     if( preferred_workgroup_size > max_workgroup_size )
     {
-        log_error( "ERROR: Reported preferred workgroup multiple larger than max workgroup size (preferred %ld, max %ld)\n", preferred_workgroup_size, max_workgroup_size );
+        log_error( "ERROR: Reported preferred workgroup multiple larger than max workgroup size (preferred %zu, max %zu)\n", preferred_workgroup_size, max_workgroup_size );
         return -1;
     }
 

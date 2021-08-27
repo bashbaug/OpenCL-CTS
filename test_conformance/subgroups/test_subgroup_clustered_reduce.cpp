@@ -176,7 +176,7 @@ template <typename Ty, ArithmeticOp operation> struct RED_CLU
         int ns = test_params.subgroup_size;
         int ng = test_params.global_workgroup_size;
         ng = ng / nw;
-        log_info("  sub_group_clustered_reduce_%s(%s, %d bytes) ...\n",
+        log_info("  sub_group_clustered_reduce_%s(%s, %zu bytes) ...\n",
                  operation_names(operation), TypeManager<Ty>::name(),
                  sizeof(Ty));
         genrand<Ty, operation>(x, t, m, ns, nw, ng);
@@ -207,7 +207,7 @@ template <typename Ty, ArithmeticOp operation> struct RED_CLU
                 if (dts != sizeof(Ty))
                 {
                     log_error("ERROR: sub_group_clustered_reduce_%s(%s) "
-                              "wrong data type size detected, expected: %d, "
+                              "wrong data type size detected, expected: %zu, "
                               "used by device %d, in group %d\n",
                               operation_names(operation),
                               TypeManager<Ty>::name(), sizeof(Ty), dts, k);
@@ -256,7 +256,7 @@ template <typename Ty, ArithmeticOp operation> struct RED_CLU
             y += nw;
             m += 4 * nw;
         }
-        log_info("  sub_group_clustered_reduce_%s(%s, %d bytes) ... passed\n",
+        log_info("  sub_group_clustered_reduce_%s(%s, %zu bytes) ... passed\n",
                  operation_names(operation), TypeManager<Ty>::name(),
                  sizeof(Ty));
         return TEST_PASS;

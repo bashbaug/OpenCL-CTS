@@ -76,7 +76,7 @@ cl_mem create_image( cl_context context, cl_command_queue queue, BufferOwningPtr
     {
         if ( NULL == host_ptr )
         {
-            log_error( "ERROR: Unable to create backing store for pitched 3D image. %ld bytes\n",  imageInfo->depth * imageInfo->slicePitch );
+            log_error( "ERROR: Unable to create backing store for pitched 3D image. %zu bytes\n",  imageInfo->depth * imageInfo->slicePitch );
             return NULL;
         }
         mem_flags = CL_MEM_READ_ONLY | CL_MEM_USE_HOST_PTR;
@@ -299,7 +299,7 @@ int test_fill_image_generic( cl_context context, cl_command_queue queue, image_d
         imgHost.reset(malloc(dataBytes),NULL,0,dataBytes);
         if (imgHost == NULL)
         {
-            log_error( "ERROR: Unable to malloc %lu bytes for imgHost\n", dataBytes );
+            log_error( "ERROR: Unable to malloc %zu bytes for imgHost\n", dataBytes );
             return -1;
         }
     }
