@@ -4,6 +4,7 @@ set(${MODULE_NAME}_SOURCES
   main.cpp
   test_basic_versions.cpp
   test_cl_khr_expect_assume.cpp
+  test_cl_khr_kernel_clock.cpp
   test_decorate.cpp
   test_get_program_il.cpp
   test_linkage.cpp

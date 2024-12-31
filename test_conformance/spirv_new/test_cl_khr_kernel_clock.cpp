@@ -110,14 +110,14 @@ static int test_kernel_clock(cl_device_id device, cl_context context,
     return TEST_PASS;
 }
 
-TEST_SPIRV_FUNC(kernel_clock_sub_group)
+REGISTER_TEST(kernel_clock_sub_group)
 {
-    if (false && !is_extension_available(deviceID, "cl_khr_kernel_clock"))
+    if (false && !is_extension_available(device, "cl_khr_kernel_clock"))
     {
         log_info("cl_khr_kernel_clock is not supported; skipping test.\n");
         return TEST_SKIPPED_ITSELF;
     }
 
-    return test_kernel_clock(deviceID, context, queue,
+    return test_kernel_clock(device, context, queue,
                              CL_DEVICE_KERNEL_CLOCK_SCOPE_SUB_GROUP_KHR);
 }
