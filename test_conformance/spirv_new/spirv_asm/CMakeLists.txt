@@ -41,6 +41,9 @@ set(spirv_sources
     branch_conditional_weighted.spvasm64
     branch_simple.spvasm32
     branch_simple.spvasm64
+    clock_read_device.spvasm64
+    clock_read_sub_group.spvasm64
+    clock_read_sub_group_hilo.spvasm64
     composite_construct_int4.spvasm32
     composite_construct_int4.spvasm64
     composite_construct_struct.spvasm32
