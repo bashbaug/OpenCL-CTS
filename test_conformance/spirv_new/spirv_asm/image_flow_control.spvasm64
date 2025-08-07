@@ -1,0 +1,91 @@
+; SPIR-V
+; Version: 1.0
+; Generator: Khronos LLVM/SPIR-V Translator; 14
+; Bound: 55
+; Schema: 0
+               OpCapability Addresses
+               OpCapability Linkage
+               OpCapability Kernel
+               OpCapability Int64
+               OpCapability ImageBasic
+               OpCapability LiteralSampler
+               OpExtension "SPV_KHR_no_integer_wrap_decoration"
+          %1 = OpExtInstImport "OpenCL.std"
+               OpMemoryModel Physical64 OpenCL
+               OpEntryPoint Kernel %50 "image_flow_control_test" %__spirv_BuiltInGlobalInvocationId
+               OpSource OpenCL_C 102000
+               OpName %__spirv_BuiltInGlobalInvocationId "__spirv_BuiltInGlobalInvocationId"
+               OpName %test "test"
+               OpName %TempSampledImage "TempSampledImage"
+               OpDecorate %__spirv_BuiltInGlobalInvocationId LinkageAttributes "__spirv_BuiltInGlobalInvocationId" Import
+               OpDecorate %__spirv_BuiltInGlobalInvocationId Constant
+               OpDecorate %__spirv_BuiltInGlobalInvocationId BuiltIn GlobalInvocationId
+               OpDecorate %test LinkageAttributes "test" Export
+               OpDecorate %12 FuncParamAttr NoCapture
+               OpDecorate %12 Alignment 4
+               OpDecorate %34 NoSignedWrap
+               OpDecorate %39 NoSignedWrap
+               OpDecorate %43 NoSignedWrap
+               OpDecorate %47 NoSignedWrap
+               OpDecorate %51 FuncParamAttr NoCapture
+               OpDecorate %51 Alignment 4
+      %ulong = OpTypeInt 64 0
+       %uint = OpTypeInt 32 0
+%uint_1048576 = OpConstant %uint 1048576
+  %uint_4304 = OpConstant %uint 4304
+  %uint_4272 = OpConstant %uint 4272
+     %uint_0 = OpConstant %uint 0
+    %v3ulong = OpTypeVector %ulong 3
+%_ptr_Input_v3ulong = OpTypePointer Input %v3ulong
+       %void = OpTypeVoid
+%_ptr_CrossWorkgroup_uint = OpTypePointer CrossWorkgroup %uint
+          %9 = OpTypeImage %void 2D 0 0 0 0 Unknown ReadOnly
+         %10 = OpTypeFunction %void %_ptr_CrossWorkgroup_uint %9
+       %bool = OpTypeBool
+         %23 = OpTypeSampler
+         %25 = OpTypeSampledImage %9
+     %v4uint = OpTypeVector %uint 4
+     %v2uint = OpTypeVector %uint 2
+      %float = OpTypeFloat 32
+%__spirv_BuiltInGlobalInvocationId = OpVariable %_ptr_Input_v3ulong Input
+         %24 = OpConstantSampler %23 None 0 Nearest
+         %29 = OpConstantNull %v2uint
+    %float_0 = OpConstant %float 0
+       %test = OpFunction %void None %10
+         %12 = OpFunctionParameter %_ptr_CrossWorkgroup_uint
+         %13 = OpFunctionParameter %9
+         %14 = OpLabel
+         %17 = OpLoad %v3ulong %__spirv_BuiltInGlobalInvocationId Aligned 32
+         %18 = OpCompositeExtract %ulong %17 0
+         %19 = OpUConvert %uint %18
+         %22 = OpSLessThan %bool %19 %uint_1048576
+               OpBranchConditional %22 %15 %16
+         %15 = OpLabel
+%TempSampledImage = OpSampledImage %25 %13 %24
+         %32 = OpImageSampleExplicitLod %v4uint %TempSampledImage %29 Lod %float_0
+         %33 = OpImageRead %v4uint %13 %29
+         %34 = OpIAdd %v4uint %33 %32
+         %35 = OpCompositeExtract %uint %34 0
+         %36 = OpImageQueryFormat %uint %13
+         %38 = OpIAdd %uint %36 %uint_4304
+         %39 = OpIAdd %uint %35 %38
+         %40 = OpImageQueryOrder %uint %13
+         %42 = OpIAdd %uint %40 %uint_4272
+         %43 = OpIAdd %uint %39 %42
+         %45 = OpImageQuerySizeLod %v2uint %13 %uint_0
+         %46 = OpCompositeExtract %uint %45 0
+         %47 = OpIAdd %uint %43 %46
+         %48 = OpSConvert %ulong %19
+         %49 = OpInBoundsPtrAccessChain %_ptr_CrossWorkgroup_uint %12 %48
+               OpStore %49 %47 Aligned 4
+               OpBranch %16
+         %16 = OpLabel
+               OpReturn
+               OpFunctionEnd
+         %50 = OpFunction %void None %10
+         %51 = OpFunctionParameter %_ptr_CrossWorkgroup_uint
+         %52 = OpFunctionParameter %9
+         %53 = OpLabel
+         %54 = OpFunctionCall %void %test %51 %52
+               OpReturn
+               OpFunctionEnd

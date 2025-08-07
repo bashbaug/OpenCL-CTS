@@ -253,6 +253,7 @@ set(spirv_sources
     fsub_float4.spvasm64
     fsub_half.spvasm32
     fsub_half.spvasm64
+    image_flow_control.spvasm64
     label_simple.spvasm32
     label_simple.spvasm64
     lifetime_simple.spvasm32
