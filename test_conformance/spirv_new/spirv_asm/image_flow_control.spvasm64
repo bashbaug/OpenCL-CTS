@@ -36,12 +36,15 @@
         %dst = OpFunctionParameter %_ptr_CrossWorkgroup_uint
       %image = OpFunctionParameter %image2d_t
       %entry = OpLabel
+; This version does not pass through spirv-val, but still works on many implementations.
+%sampledimage = OpSampledImage %sampledimage_t %image %sampler
       %gidv3 = OpLoad %v3ulong %gid Aligned 32
        %gid0 = OpCompositeExtract %ulong %gidv3 0
        %cond = OpSLessThan %bool %gid0 %upper
                OpBranchConditional %cond %then %endif
        %then = OpLabel
-%sampledimage = OpSampledImage %sampledimage_t %image %sampler
+; This version should pass on all implementations, and passes through spirv-val.
+;%sampledimage = OpSampledImage %sampledimage_t %image %sampler
 %dst_wsampler = OpImageSampleExplicitLod %v4uint %sampledimage %coord_0_0 Lod %float_0    ; 0x11
 %dst_nosampler = OpImageRead %v4uint %image %coord_0_0                                    ; 0x11
      %sumdst = OpIAdd %v4uint %dst_wsampler %dst_nosampler  ; 0x11 + 0x11 = 0x22
