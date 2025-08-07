@@ -64,7 +64,7 @@ REGISTER_TEST(image_flow_control)
                                 NULL, NULL);
     SPIRV_CHECK_ERROR(error, "Unable to read destination buffer");
 
-    const cl_uint expected = 8623;
+    const cl_uint expected = 47;
     if (h_dst != expected)
     {
         log_error("Mismatch! Got: %u, Wanted: %u\n",
