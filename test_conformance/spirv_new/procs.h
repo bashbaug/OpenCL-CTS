@@ -47,5 +47,6 @@ struct spec_const
 
 int get_program_with_il(clProgramWrapper &prog, const cl_device_id deviceID,
                         const cl_context context, const char *prog_name,
+                        const char *build_options = nullptr,
                         spec_const spec_const_def = spec_const());
 std::vector<unsigned char> readSPIRV(const char *file_name);

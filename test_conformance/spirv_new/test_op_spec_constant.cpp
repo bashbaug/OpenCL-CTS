@@ -32,8 +32,8 @@ int run_case(cl_device_id deviceID, cl_context context, cl_command_queue queue,
         spec_const new_spec_const =
             spec_const(101, sizeof(T), &spec_constant_value);
 
-        err =
-            get_program_with_il(prog, deviceID, context, name, new_spec_const);
+        err = get_program_with_il(prog, deviceID, context, name, nullptr,
+                                  new_spec_const);
     }
     else
     {

@@ -26,7 +26,10 @@ static int test_struct_helper(cl_device_id deviceID, cl_context context,
     cl_int error = CL_SUCCESS;
 
     clProgramWrapper prog;
-    error = get_program_with_il(prog, deviceID, context, filename);
+    // TODO: -cl-opt-disable is needed to preserve the function call on some
+    // devices.  Is this a proper test?
+    error = get_program_with_il(prog, deviceID, context, filename,
+                                "-cl-opt-disable");
     SPIRV_CHECK_ERROR(error, "Failed to compile spv program");
 
     clKernelWrapper kernel = clCreateKernel(prog, kernelname, &error);

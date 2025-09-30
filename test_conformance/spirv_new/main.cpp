@@ -72,7 +72,8 @@ std::vector<unsigned char> readSPIRV(const char *file_name)
 static int offline_get_program_with_il(clProgramWrapper &prog,
                                        const cl_device_id deviceID,
                                        const cl_context context,
-                                       const char *prog_name)
+                                       const char *prog_name,
+                                       const char *build_options)
 {
     cl_int err = 0;
     std::string outputTypeStr = "binary";
@@ -85,7 +86,7 @@ static int offline_get_program_with_il(clProgramWrapper &prog,
         outputFilename + " " +
         gAddrWidth + " " +
         outputTypeStr + " " +
-        "-cl-std=CL2.0";
+        (build_options ? build_options : "");
 
     std::string scriptToRunString = defaultScript + scriptArgs;
 
@@ -115,12 +116,12 @@ static int offline_get_program_with_il(clProgramWrapper &prog,
 
 int get_program_with_il(clProgramWrapper &prog, const cl_device_id deviceID,
                         const cl_context context, const char *prog_name,
-                        spec_const spec_const_def)
+                        const char *build_options, spec_const spec_const_def)
 {
     cl_int err = 0;
     if (gCompilationMode == kBinary)
     {
-        return offline_get_program_with_il(prog, deviceID, context, prog_name);
+        return offline_get_program_with_il(prog, deviceID, context, prog_name, build_options);
     }
 
     std::vector<unsigned char> buffer_vec = readSPIRV(prog_name);
@@ -171,7 +172,7 @@ int get_program_with_il(clProgramWrapper &prog, const cl_device_id deviceID,
             err, "Failed to create program with clCreateProgramWithILKHR");
     }
 
-    err = clBuildProgram(prog, 1, &deviceID, NULL, NULL, NULL);
+    err = clBuildProgram(prog, 1, &deviceID, build_options, NULL, NULL);
     if (err != CL_SUCCESS)
     {
         cl_int outputErr = OutputBuildLog(prog, deviceID);
