@@ -81,12 +81,9 @@ static int offline_get_program_with_il(clProgramWrapper &prog,
     std::string outputFilename = spvBinariesPath + slash + std::string(prog_name);
     std::string sourceFilename = outputFilename +  spvExt;
 
-    std::string scriptArgs =
-        sourceFilename + " " +
-        outputFilename + " " +
-        gAddrWidth + " " +
-        outputTypeStr + " " +
-        (build_options ? build_options : "");
+    std::string scriptArgs = sourceFilename + " " + outputFilename + " "
+        + gAddrWidth + " " + outputTypeStr + " "
+        + (build_options ? build_options : "");
 
     std::string scriptToRunString = defaultScript + scriptArgs;
 
@@ -121,7 +118,8 @@ int get_program_with_il(clProgramWrapper &prog, const cl_device_id deviceID,
     cl_int err = 0;
     if (gCompilationMode == kBinary)
     {
-        return offline_get_program_with_il(prog, deviceID, context, prog_name, build_options);
+        return offline_get_program_with_il(prog, deviceID, context, prog_name,
+                                           build_options);
     }
 
     std::vector<unsigned char> buffer_vec = readSPIRV(prog_name);
