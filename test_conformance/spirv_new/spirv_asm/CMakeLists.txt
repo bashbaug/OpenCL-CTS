@@ -357,6 +357,12 @@ set(spirv_sources
     spv1.1/basic.spvasm64
     spv1.2/basic.spvasm32
     spv1.2/basic.spvasm64
+    spv1.2/ext_cl_intel_register_controls_literal.spvasm32
+    spv1.2/ext_cl_intel_register_controls_literal.spvasm64
+    spv1.2/ext_cl_intel_register_controls_named_auto.spvasm32
+    spv1.2/ext_cl_intel_register_controls_named_auto.spvasm64
+    spv1.2/ext_cl_intel_register_controls_specconst.spvasm32
+    spv1.2/ext_cl_intel_register_controls_specconst.spvasm64
     spv1.3/basic.spvasm32
     spv1.3/basic.spvasm64
     spv1.4/basic.spvasm32

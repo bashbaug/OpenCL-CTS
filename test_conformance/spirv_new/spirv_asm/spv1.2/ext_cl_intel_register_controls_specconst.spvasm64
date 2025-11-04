@@ -1,0 +1,18 @@
+               OpCapability Addresses
+               OpCapability Kernel
+               OpCapability RegisterLimitsINTEL
+               OpExtension "SPV_INTEL_maximum_registers"
+               OpMemoryModel Physical64 OpenCL
+               OpEntryPoint Kernel %kernel "test"
+               OpExecutionModeId %kernel MaximumRegistersIdINTEL %max_regs
+               OpDecorate %max_regs SpecId 101
+       %uint = OpTypeInt 32 0
+   %max_regs = OpSpecConstant %uint 0
+       %void = OpTypeVoid
+   %gptr_int = OpTypePointer CrossWorkgroup %uint
+ %kernel_sig = OpTypeFunction %void %gptr_int
+     %kernel = OpFunction %void None %kernel_sig
+        %dst = OpFunctionParameter %gptr_int
+      %entry = OpLabel
+               OpReturn
+               OpFunctionEnd
