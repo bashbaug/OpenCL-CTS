@@ -18,6 +18,7 @@
 #include "harness/conversions.h"
 #include "harness/stringHelpers.h"
 #include <array>
+#include <cinttypes>
 #include <vector>
 
 const char *sample_single_test_kernel[] = {
@@ -980,27 +981,107 @@ REGISTER_TEST(negative_invalid_arg_index)
     return TEST_PASS;
 }
 
-REGISTER_TEST(negative_invalid_arg_size_local)
+REGISTER_TEST(local_arg_size_zero)
 {
     cl_int error = CL_SUCCESS;
+
+    const char *program_source = R"(
+        struct s {
+            const local void* decl0;
+            const local void* decl1;
+            const local void* arg0;
+            const local void* arg1;
+        };
+        __kernel void test(global struct s* dst, local int* arg0, local int* arg1)
+        {
+            // local int decl0[1];
+            // local int decl1[1];
+            local void* decl0 = NULL;
+            local void* decl1 = NULL;
+            size_t  tid = get_global_id(0);
+            struct s val = { decl0, decl1, arg0, arg1 };
+            dst[tid] = val;
+        }
+    )";
+
     clProgramWrapper program;
-    clKernelWrapper local_arg_kernel;
+    clKernelWrapper kernel;
 
     // Setup the test
     error = create_single_kernel_helper(
-        context, &program, nullptr, 1, &sample_local_size_test_kernel, nullptr);
-    test_error(error, "Unable to build test program");
+        context, &program, &kernel, 1, &program_source, "test");
+    test_error(error, "Unable to create test kernel");
 
-    local_arg_kernel = clCreateKernel(program, "local_size_test", &error);
-    test_error(error, "Unable to get local_size_test kernel for built program");
+    cl_uint addressBits = 0;
+    error = clGetDeviceInfo(device, CL_DEVICE_ADDRESS_BITS,
+                            sizeof(addressBits), &addressBits, nullptr);
+    test_error(error, "clGetDeviceInfo for address bits failed");
 
-    // Run the test
-    error = clSetKernelArg(local_arg_kernel, 0, 0, nullptr);
-    test_failure_error_ret(
-        error, CL_INVALID_ARG_SIZE,
-        "clSetKernelArg is supposed to fail with CL_INVALID_ARG_SIZE when 0 is "
-        "passed to a local qualifier kernel argument",
-        TEST_FAIL);
+    const size_t num_work_groups = 256;
+    const size_t local_work_size = 1;
+    const size_t global_work_size = num_work_groups * local_work_size;
+
+    const size_t ptrSize = addressBits / 8;
+    clMemWrapper outputBuffer = clCreateBuffer(
+        context, CL_MEM_WRITE_ONLY,
+        global_work_size * ptrSize * 4, nullptr, &error);
+    test_error(error, "clCreateBuffer for output buffer failed");
+
+    error = clSetKernelArg(kernel, 0, sizeof(cl_mem), &outputBuffer);
+    test_error(error, "clSetKernelArg for output buffer failed");
+
+    error |= clSetKernelArg(kernel, 1, 0, nullptr);
+    error |= clSetKernelArg(kernel, 2, 0, nullptr);
+    test_error(error, "clSetKernelArg for local arguments failed");
+
+    error = clEnqueueNDRangeKernel(queue, kernel, 1, nullptr,
+                                   &global_work_size, &local_work_size,
+                                   0, nullptr, nullptr);
+    test_error(error, "clEnqueueNDRangeKernel failed");
+
+    if (ptrSize == 8)
+    {
+        std::vector<cl_ulong> outputData(global_work_size * 4);
+        error = clEnqueueReadBuffer(queue, outputBuffer, CL_TRUE, 0,
+                                    outputData.size() * sizeof(cl_ulong),
+                                    outputData.data(), 0, nullptr, nullptr);
+        test_error(error, "clEnqueueReadBuffer failed");
+
+        for (size_t i = 0; i < global_work_size; ++i)
+        {
+            log_info("%6zu: %016" PRIx64 " %016" PRIx64 " %016" PRIx64 " %016" PRIx64 "\n",
+                   i,
+                   outputData[i * 4 + 0],
+                   outputData[i * 4 + 1],
+                   outputData[i * 4 + 2],
+                   outputData[i * 4 + 3]);
+        }
+    }
+    else
+    {
+        std::vector<cl_uint> outputData(global_work_size * 4);
+        error = clEnqueueReadBuffer(queue, outputBuffer, CL_TRUE, 0,
+                                    outputData.size() * sizeof(cl_uint),
+                                    outputData.data(), 0, nullptr, nullptr);
+        test_error(error, "clEnqueueReadBuffer failed");
+
+        for (size_t i = 0; i < global_work_size; ++i)
+        {
+            log_info("%6zu: %08" PRIx32 " %08" PRIx32 " %08" PRIx32 " %08" PRIx32 "\n",
+                   i,
+                   outputData[i * 4 + 0],
+                   outputData[i * 4 + 1],
+                   outputData[i * 4 + 2],
+                   outputData[i * 4 + 3]);
+        }
+    }
+
+    cl_ulong local_mem_size = 0;
+    error = clGetKernelWorkGroupInfo(kernel, device, CL_KERNEL_LOCAL_MEM_SIZE,
+                            sizeof(local_mem_size), &local_mem_size, nullptr);
+    test_error(error, "clGetKernelWorkGroupInfo for local mem size failed");
+
+    log_info("Kernel local memory size: %" PRIu64 " bytes\n", local_mem_size);
 
     return TEST_PASS;
 }
