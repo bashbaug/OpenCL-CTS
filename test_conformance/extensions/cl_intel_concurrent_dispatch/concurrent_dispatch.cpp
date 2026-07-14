@@ -209,7 +209,7 @@ static int concurrent_dispatch_helper(cl_device_id device, cl_context context,
         if (check[gws + 1] != 1)
         {
             test_fail("Unexpected result for device barrier valid: got %u\n",
-                      check[gws]);
+                      check[gws + 1]);
         }
     }
     else
@@ -229,7 +229,7 @@ static int concurrent_dispatch_helper(cl_device_id device, cl_context context,
         if (check[gws + 1] != 0)
         {
             test_fail("Unexpected result for device barrier valid: got %u\n",
-                      check[gws]);
+                      check[gws + 1]);
         }
     }
 
