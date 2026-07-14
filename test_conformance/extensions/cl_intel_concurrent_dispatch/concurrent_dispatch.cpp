@@ -186,7 +186,6 @@ static int concurrent_dispatch_helper(cl_device_id device, cl_context context,
                                 nullptr, nullptr);
     test_error_fail(error, "clEnqueueReadBuffer failed");
 
-    // Check total:
     if (check[gws] != gws)
     {
         test_fail("Unexpected total: expected %zu, got %u\n", gws, check[gws]);
@@ -194,14 +193,12 @@ static int concurrent_dispatch_helper(cl_device_id device, cl_context context,
 
     if (dispatch_type == CL_KERNEL_EXEC_INFO_DISPATCH_TYPE_CONCURRENT_INTEL)
     {
-        // Check device barrier valid:
         if (check[gws + 1] != 1)
         {
             test_fail("Unexpected result for device barrier valid: got %u\n",
                       check[gws + 1]);
         }
 
-        // Check per-work-item results:
         for (size_t i = 0; i < gws; i++)
         {
             if (check[i] != gws + 1)
@@ -214,21 +211,19 @@ static int concurrent_dispatch_helper(cl_device_id device, cl_context context,
     }
     else
     {
-        // Check device barrier valid:
         if (check[gws + 1] != 0)
         {
             test_fail("Unexpected result for device barrier valid: got %u\n",
                       check[gws + 1]);
         }
 
-        // Check per-work-item results:
         for (size_t i = 0; i < gws; i++)
         {
             if (check[i] > gws + 1)
             {
-                test_fail(
-                    "Unexpected result at index %zu: expected %zu, got %u\n", i,
-                    gws + 1, check[i]);
+                test_fail("Unexpected result at index %zu: expected no more "
+                          "than %zu, got %u\n",
+                          i, gws + 1, check[i]);
             }
         }
     }
